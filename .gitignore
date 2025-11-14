@@ -3,9 +3,10 @@ node_modules
 package-lock.json
 
 # Build output
-# dist (kept for GitHub Pages deployment)
+dist
 dist-ssr
 *.local
+# docs folder is kept for GitHub Pages deployment
 
 # Editor directories and files
 .vscode/*
