@@ -21,20 +21,26 @@ export default function MortgageAnalyzer() {
   const [activeScenarios, setActiveScenarios] = useState([1, 2, 3]);
 
   const calculateMortgage = (principal, annualRate, years, acceleratedTargetYears = null) => {
+    // Standard amortization formula: M = P * [r(1+r)^n] / [(1+r)^n - 1]
+    // Where: M = monthly payment, P = principal, r = monthly rate, n = number of payments
     const monthlyRate = annualRate / 100 / 12;
     const numPayments = years * 12;
     const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
-    
+
     if (acceleratedTargetYears) {
-      // Calculate what payment is needed to pay off in target years
+      // Calculate accelerated payoff: same loan, but paid off in fewer years
       const targetPayments = acceleratedTargetYears * 12;
+
+      // Calculate the higher monthly payment needed to pay off in target years
+      const targetMonthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, targetPayments)) / (Math.pow(1 + monthlyRate, targetPayments) - 1);
+
+      // Iterate through each payment to calculate exact interest/principal split
       let balance = principal;
       let totalPaid = 0;
       let totalInterest = 0;
-      
+
       for (let month = 1; month <= targetPayments; month++) {
         const interestPayment = balance * monthlyRate;
-        const targetMonthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, targetPayments)) / (Math.pow(1 + monthlyRate, targetPayments) - 1);
         const principalPayment = targetMonthlyPayment - interestPayment;
         balance -= principalPayment;
         totalPaid += targetMonthlyPayment;
@@ -93,18 +99,20 @@ export default function MortgageAnalyzer() {
   };
 
   const generateAmortizationSchedule = (result) => {
+    // Generate year-by-year amortization breakdown
+    // Each payment splits into: Interest (on remaining balance) + Principal (reduces balance)
     const schedule = [];
     const monthlyRate = result.rate / 100 / 12;
     let balance = result.principal;
-    
+
     for (let year = 0; year <= Math.ceil(result.actualTerm); year++) {
       const monthsInYear = year === Math.ceil(result.actualTerm) ? (result.actualTerm % 1) * 12 : 12;
       let yearPrincipal = 0;
       let yearInterest = 0;
-      
+
       for (let month = 0; month < monthsInYear && balance > 0; month++) {
-        const interestPayment = balance * monthlyRate;
-        const principalPayment = Math.min(result.monthlyPayment - interestPayment, balance);
+        const interestPayment = balance * monthlyRate; // Interest accrues on current balance
+        const principalPayment = Math.min(result.monthlyPayment - interestPayment, balance); // Rest goes to principal
         yearPrincipal += principalPayment;
         yearInterest += interestPayment;
         balance -= principalPayment;
