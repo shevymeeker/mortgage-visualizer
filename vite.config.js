@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/archived/',
+  base: '/mortgage-visualizer/',
   build: {
     outDir: 'docs',
   },
