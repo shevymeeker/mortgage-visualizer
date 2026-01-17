@@ -1,0 +1,55 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="150" fill="#1e293b" opacity="0.5"/>
+  <circle cx="1100" cy="530" r="200" fill="#1e293b" opacity="0.5"/>
+
+  <!-- Chart icon/graphic -->
+  <g transform="translate(100, 200)">
+    <!-- Simple bar chart representation -->
+    <rect x="0" y="80" width="60" height="120" fill="#3b82f6" rx="4"/>
+    <rect x="80" y="40" width="60" height="160" fill="#8b5cf6" rx="4"/>
+    <rect x="160" y="100" width="60" height="100" fill="#3b82f6" rx="4"/>
+    <rect x="240" y="60" width="60" height="140" fill="#8b5cf6" rx="4"/>
+  </g>
+
+  <!-- Title -->
+  <text x="450" y="250" font-family="'Outfit', -apple-system, BlinkMacSystemFont, sans-serif" font-size="72" font-weight="700" fill="#ffffff">
+    Mortgage Analyzer
+  </text>
+
+  <!-- Subtitle -->
+  <text x="450" y="320" font-family="'Outfit', -apple-system, BlinkMacSystemFont, sans-serif" font-size="32" font-weight="400" fill="#94a3b8">
+    Analyze and compare mortgage options
+  </text>
+
+  <!-- Feature highlights -->
+  <g transform="translate(450, 380)">
+    <text y="0" font-family="'IBM Plex Mono', monospace" font-size="24" font-weight="400" fill="#60a5fa">
+      ✓ Detailed calculations
+    </text>
+    <text y="45" font-family="'IBM Plex Mono', monospace" font-size="24" font-weight="400" fill="#60a5fa">
+      ✓ Visual comparisons
+    </text>
+    <text y="90" font-family="'IBM Plex Mono', monospace" font-size="24" font-weight="400" fill="#60a5fa">
+      ✓ Smart insights
+    </text>
+  </g>
+
+  <!-- Accent bar at bottom -->
+  <rect y="610" width="1200" height="20" fill="url(#accentGradient)"/>
+</svg>
