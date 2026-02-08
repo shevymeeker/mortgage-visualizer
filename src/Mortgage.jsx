@@ -3,19 +3,20 @@ import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, L
 
 export default function MortgageAnalyzer() {
   const [housePrice, setHousePrice] = useState(200000);
+  const [mortgageRate, setMortgageRate] = useState(6.5);
   const [downPaymentPercent, setDownPaymentPercent] = useState(5);
   const [selectedView, setSelectedView] = useState('overview');
   const [highlightedScenario, setHighlightedScenario] = useState(null);
   
   // Preset scenarios from the document
   const presetScenarios = [
-    { id: 1, name: '30-Yr Standard', term: 30, rate: 6.3, accelerated: false, targetYears: null, color: '#3b82f6' },
-    { id: 2, name: '20-Yr Standard', term: 20, rate: 6.0, accelerated: false, targetYears: null, color: '#10b981' },
-    { id: 3, name: '50-Yr Standard', term: 50, rate: 6.8, accelerated: false, targetYears: null, color: '#ef4444' },
-    { id: 4, name: '50-Yr (Paid in 30)', term: 50, rate: 6.8, accelerated: true, targetYears: 30, color: '#f59e0b' },
-    { id: 5, name: '30-Yr (Paid in 20)', term: 30, rate: 6.3, accelerated: true, targetYears: 20, color: '#8b5cf6' },
-    { id: 6, name: '50-Yr Accelerated', term: 50, rate: 6.8, accelerated: true, targetYears: 36.46, color: '#ec4899' },
-    { id: 7, name: '50-Yr (3.5% Down)', term: 50, rate: 6.8, accelerated: false, targetYears: null, color: '#14b8a6', specialDown: 3.5 },
+    { id: 1, name: '30-Yr Standard', term: 30, rate: mortgageRate, accelerated: false, targetYears: null, color: '#3b82f6' },
+    { id: 2, name: '20-Yr Standard', term: 20, rate: mortgageRate, accelerated: false, targetYears: null, color: '#10b981' },
+    { id: 3, name: '50-Yr Standard', term: 50, rate: mortgageRate, accelerated: false, targetYears: null, color: '#ef4444' },
+    { id: 4, name: '50-Yr (Paid in 30)', term: 50, rate: mortgageRate, accelerated: true, targetYears: 30, color: '#f59e0b' },
+    { id: 5, name: '30-Yr (Paid in 20)', term: 30, rate: mortgageRate, accelerated: true, targetYears: 20, color: '#8b5cf6' },
+    { id: 6, name: '50-Yr Accelerated', term: 50, rate: mortgageRate, accelerated: true, targetYears: 36.46, color: '#ec4899' },
+    { id: 7, name: '50-Yr (3.5% Down)', term: 50, rate: mortgageRate, accelerated: false, targetYears: null, color: '#14b8a6', specialDown: 3.5 },
   ];
 
   const [activeScenarios, setActiveScenarios] = useState([1, 2, 3]);
@@ -86,7 +87,7 @@ export default function MortgageAnalyzer() {
           principal
         };
       });
-  }, [activeScenarios, housePrice, downPaymentPercent]);
+  }, [activeScenarios, housePrice, downPaymentPercent, mortgageRate]);
 
   const toggleScenario = (id) => {
     if (activeScenarios.includes(id)) {
@@ -229,21 +230,39 @@ export default function MortgageAnalyzer() {
         <div className="animate-in delay-100 bg-white rounded-2xl border border-indigo-200 p-8 shadow-sm">
           <h2 className="text-2xl font-bold text-slate-900 mb-6">Base Parameters</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-3">
-              <div className="flex justify-between items-baseline">
-                <label className="text-sm font-medium text-slate-700">House Price</label>
-                <span className="font-mono text-lg font-bold text-teal-700">${housePrice.toLocaleString()}</span>
+            <div className="space-y-6">
+              <div className="space-y-3">
+                <div className="flex justify-between items-baseline">
+                  <label className="text-sm font-medium text-slate-700">House Price</label>
+                  <span className="font-mono text-lg font-bold text-teal-700">${housePrice.toLocaleString()}</span>
+                </div>
+                <input
+                  type="range"
+                  min="50000"
+                  max="1000000"
+                  step="10000"
+                  value={housePrice}
+                  onChange={(e) => setHousePrice(parseInt(e.target.value))}
+                  className="w-full h-2 bg-indigo-100 rounded-lg appearance-none cursor-pointer accent-teal-600"
+                />
+                <p className="text-xs text-slate-500">$50K — $1M</p>
               </div>
-              <input
-                type="range"
-                min="50000"
-                max="1000000"
-                step="10000"
-                value={housePrice}
-                onChange={(e) => setHousePrice(parseInt(e.target.value))}
-                className="w-full h-2 bg-indigo-100 rounded-lg appearance-none cursor-pointer accent-teal-600"
-              />
-              <p className="text-xs text-slate-500">$50K — $1M</p>
+              <div className="space-y-3">
+                <div className="flex justify-between items-baseline">
+                  <label className="text-sm font-medium text-slate-700">Mortgage Rate</label>
+                  <span className="font-mono text-lg font-bold text-teal-700">{mortgageRate.toFixed(1)}%</span>
+                </div>
+                <input
+                  type="range"
+                  min="2"
+                  max="12"
+                  step="0.1"
+                  value={mortgageRate}
+                  onChange={(e) => setMortgageRate(parseFloat(e.target.value))}
+                  className="w-full h-2 bg-indigo-100 rounded-lg appearance-none cursor-pointer accent-teal-600"
+                />
+                <p className="text-xs text-slate-500">2% — 12%</p>
+              </div>
             </div>
             <div className="space-y-3">
               <div className="flex justify-between items-baseline">
