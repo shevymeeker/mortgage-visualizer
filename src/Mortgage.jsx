@@ -220,9 +220,12 @@ export default function MortgageAnalyzer() {
         <div className="animate-in relative overflow-hidden rounded-2xl border border-indigo-200 p-8 md:p-10">
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-teal-50" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-100 to-transparent rounded-full -mr-48 -mt-48 opacity-30" />
-          <div className="relative z-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2 tracking-tight">Mortgage Strategy Analyzer</h1>
-            <p className="text-lg text-slate-600 max-w-2xl">Comprehensive comparison of seven mortgage scenarios with real-time calculations. All figures show Principal and Interest only.</p>
+          <div className="relative z-10 flex items-center gap-6">
+            <img src="/wildmanlogo.png" alt="Wildman logo" className="h-16 md:h-20 w-auto" />
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2 tracking-tight">Wildman Mortgage Visualizer</h1>
+              <p className="text-lg text-slate-600 max-w-2xl">Comprehensive comparison of seven mortgage scenarios with real-time calculations. All figures show Principal and Interest only.</p>
+            </div>
           </div>
         </div>
 
