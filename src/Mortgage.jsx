@@ -207,7 +207,7 @@ export default function MortgageAnalyzer() {
                 Wildman Mortgage Visualizer
               </h1>
               <p className="mt-1 text-stone-500 text-sm md:text-base max-w-xl">
-                Seven scenarios, live numbers. Principal and interest only — taxes and insurance are separate.
+               Analyze and compare mortgage options with detailed calculations and visualizations
               </p>
             </div>
           </div>
