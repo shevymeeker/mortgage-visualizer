@@ -3,25 +3,15 @@
 @tailwind utilities;
 
 :root {
-  /* Primary colors - Finance-inspired palette */
-  --color-primary: #0f766e;
-  --color-primary-light: #14b8a6;
-  --color-primary-dark: #0d5d56;
-
-  /* Accent colors - Sharp, strategic */
-  --color-accent-warm: #d97706;
-  --color-accent-cool: #2563eb;
-  --color-accent-alert: #dc2626;
-
-  /* Neutral palette */
-  --color-dark: #0f172a;
-  --color-light: #f8fafc;
-  --color-border: #e0e7ff;
-
-  /* Text colors */
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #78716c;
+  --teal: #0d7264;
+  --teal-mid: #0f8a7a;
+  --danger: #b91c1c;
+  --border: #e5e1db;
+  --bg: #f5f3ef;
+  --card: #ffffff;
+  --text-primary: #1c1917;
+  --text-secondary: #57534e;
+  --text-muted: #a8a29e;
 }
 
 html {
@@ -29,12 +19,11 @@ html {
 }
 
 body {
-  color: var(--color-text-primary);
-  background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+  color: var(--text-primary);
+  background-color: var(--bg);
   min-height: 100vh;
 }
 
-/* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -44,11 +33,73 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'IBM Plex Mono', monospace;
 }
 
-/* Smooth page animations */
+/* Card base */
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+/* Custom range slider */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  width: 100%;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--teal);
+  margin-top: -8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+  box-shadow: 0 2px 8px rgba(13,114,100,0.35);
+}
+
+input[type='range']:focus {
+  outline: none;
+}
+
+input[type='range']:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px rgba(13,114,100,0.18), 0 1px 4px rgba(0,0,0,0.18);
+}
+
+input[type='range']::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+
+/* Page animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -56,9 +107,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Staggered animation delays */
 .animate-in {
-  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .delay-100 { animation-delay: 100ms; }
